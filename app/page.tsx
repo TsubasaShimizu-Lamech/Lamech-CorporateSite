@@ -1,8 +1,44 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUp } from "lucide-react"
+import { useState, FormEvent } from "react"
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setStatus('submitting')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('送信に失敗しました')
+      }
+
+      setStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 3000)
+    } catch (error) {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+    }
+  }
+
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
@@ -145,11 +181,14 @@ export default function Home() {
           </div>
           <div>
             <h3 className="mb-8 font-normal text-4xl">Contact Us</h3>
-            <form className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8">
               <div>
                 <input
                   type="text"
                   placeholder="Name"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   className="w-full p-4 text-xl border border-gray-300 bg-transparent"
                 />
               </div>
@@ -157,6 +196,9 @@ export default function Home() {
                 <input 
                   type="email" 
                   placeholder="Email" 
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                   className="w-full p-4 text-xl border border-gray-300 bg-transparent" 
                 />
               </div>
@@ -164,16 +206,26 @@ export default function Home() {
                 <textarea
                   placeholder="Message"
                   rows={6}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                   className="w-full p-4 text-xl border border-gray-300 bg-transparent"
                 ></textarea>
               </div>
               <div>
                 <button
                   type="submit"
-                  className="w-full py-4 text-xl border border-gray-300 hover:bg-gray-200 transition-colors"
+                  disabled={status === 'submitting'}
+                  className="w-full py-4 text-xl border border-gray-300 hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit
+                  {status === 'submitting' ? '送信中...' : 'Submit'}
                 </button>
+                {status === 'success' && (
+                  <p className="mt-4 text-green-600">メッセージを送信しました。</p>
+                )}
+                {status === 'error' && (
+                  <p className="mt-4 text-red-600">送信に失敗しました。もう一度お試しください。</p>
+                )}
               </div>
             </form>
           </div>
