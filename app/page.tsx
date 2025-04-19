@@ -46,7 +46,7 @@ export default function Home() {
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-3 text-black">
             <Image
-              src="/images/lamech-logo.png"
+              src="/Lamech-CorporateSite/images/lamech-logo.png"
               alt="Lamech logo small"
               width={48}
               height={48}
@@ -74,7 +74,7 @@ export default function Home() {
       <section className="flex flex-col items-center justify-center min-h-screen">
         <div className="relative w-[30vw] h-[30vw] max-w-[300px] max-h-[300px] -mb-20">
           <Image 
-            src="/images/lamech-logo.png" 
+            src="/Lamech-CorporateSite/images/lamech-logo.png" 
             alt="Lamech logo" 
             fill
             className="object-contain"
@@ -91,7 +91,7 @@ export default function Home() {
           <div className="flex">
             <div className="w-1/2 bg-gray-100">
               <Image
-                src="/images/service-it.jpg"
+                src="/Lamech-CorporateSite/images/service-it.jpg"
                 alt="Dashboard service"
                 width={1200}
                 height={900}
@@ -100,7 +100,7 @@ export default function Home() {
             </div>
             <div className="w-1/2 bg-gray-100">
               <Image
-                src="/images/service-beautysalon.jpg"
+                src="/Lamech-CorporateSite/images/service-beautysalon.jpg"
                 alt="Wellness service"
                 width={1200}
                 height={900}
