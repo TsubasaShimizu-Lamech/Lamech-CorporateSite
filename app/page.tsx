@@ -17,25 +17,26 @@ export default function Home() {
     e.preventDefault()
     setStatus('submitting')
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf4tPkoi90mb_1HWLANxwpmENVPq_EmrTt1SlW5MO2ToC9a7A/formResponse'
+    const form = new FormData()
+    form.append('entry.440491378', formData.name)
+    form.append('entry.2023816419', formData.email)
+    form.append('entry.589339108', formData.message)
 
-      if (!response.ok) {
-        throw new Error('送信に失敗しました')
-      }
+    try {
+      // CORS制約を回避するためにno-corsモードを使用
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: form
+      })
 
       setStatus('success')
       setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setStatus('idle'), 3000)
+      setTimeout(() => setStatus('idle'), 5000)
     } catch (error) {
       setStatus('error')
-      setTimeout(() => setStatus('idle'), 3000)
+      setTimeout(() => setStatus('idle'), 5000)
     }
   }
 
@@ -263,10 +264,14 @@ export default function Home() {
                   {status === 'submitting' ? '送信中...' : 'Submit'}
                 </button>
                 {status === 'success' && (
-                  <p className="mt-4 text-green-600">メッセージを送信しました。</p>
+                  <p className="mt-4 text-green-600 whitespace-pre-line">
+                    お問い合わせ頂きありがとうございます。{'\n'}担当者よりご連絡いたしますので、しばらくお待ちください。
+                  </p>
                 )}
                 {status === 'error' && (
-                  <p className="mt-4 text-red-600">送信に失敗しました。もう一度お試しください。</p>
+                  <p className="mt-4 text-red-600">
+                    送信に失敗しました。もう一度お試しください。
+                  </p>
                 )}
               </div>
             </form>
