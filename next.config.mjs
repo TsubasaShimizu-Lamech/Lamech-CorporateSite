@@ -11,7 +11,8 @@ const nextConfig = {
   },
   output: 'export',
   basePath: process.env.NODE_ENV === 'production' ? '/Lamech-CorporateSite' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/Lamech-CorporateSite' : ''
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/Lamech-CorporateSite/' : '',
+  trailingSlash: true
 }
 
 export default nextConfig
