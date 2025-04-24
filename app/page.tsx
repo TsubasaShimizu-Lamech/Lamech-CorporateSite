@@ -209,21 +209,23 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 md:py-32 px-8 md:px-16 bg-gray-100">
+      <section id="contact" className="py-16 md:py-32 px-4 md:px-16 bg-gray-50">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
           <div>
-            <h3 className="mb-6 md:mb-8 font-normal text-3xl md:text-4xl">Contact</h3>
-            <p className="text-lg md:text-xl mb-8 md:mb-16">こちらからお問い合わせください。</p>
-            <div className="mt-auto pt-16 md:pt-32">
-              <Link href="/#" className="inline-flex items-center text-lg md:text-xl">
-                <ArrowUp className="w-6 h-6 md:w-8 md:h-8 mr-2" />
+            <h3 className="text-3xl md:text-4xl font-light mb-6">Contact</h3>
+            <p className="text-lg md:text-xl text-gray-600 mb-8">こちらからお問い合わせください。</p>
+            <div className="hidden md:block mt-auto pt-16 md:pt-32">
+              <Link 
+                href="/#" 
+                className="inline-flex items-center text-lg hover:text-gray-600 transition-colors"
+              >
+                <ArrowUp className="w-6 h-6 mr-2" />
                 Back to Top
               </Link>
             </div>
           </div>
           <div>
-            <h3 className="mb-6 md:mb-8 font-normal text-3xl md:text-4xl">Contact Us</h3>
-            <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
                   type="text"
@@ -231,7 +233,7 @@ export default function Home() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full p-3 md:p-4 text-lg md:text-xl border border-gray-300 bg-transparent"
+                  className="w-full p-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
               <div>
@@ -241,7 +243,7 @@ export default function Home() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full p-3 md:p-4 text-lg md:text-xl border border-gray-300 bg-transparent" 
+                  className="w-full p-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
               <div>
@@ -251,20 +253,21 @@ export default function Home() {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                  className="w-full p-3 md:p-4 text-lg md:text-xl border border-gray-300 bg-transparent"
+                  className="w-full p-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
                 ></textarea>
               </div>
               <div>
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full py-3 md:py-4 text-lg md:text-xl border border-gray-300 hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 text-lg bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status === 'submitting' ? '送信中...' : 'Submit'}
                 </button>
                 {status === 'success' && (
-                  <p className="mt-4 text-green-600 whitespace-pre-line">
-                    お問い合わせ頂きありがとうございます。{'\n'}担当者よりご連絡いたしますので、しばらくお待ちください。
+                  <p className="mt-4 text-green-600">
+                    お問い合わせ頂きありがとうございます。
+                    担当者よりご連絡いたしますので、しばらくお待ちください。
                   </p>
                 )}
                 {status === 'error' && (
@@ -275,6 +278,15 @@ export default function Home() {
               </div>
             </form>
           </div>
+        </div>
+        <div className="md:hidden mt-16 text-center">
+          <Link 
+            href="/#" 
+            className="inline-flex items-center justify-center text-lg hover:text-gray-600 transition-colors"
+          >
+            <ArrowUp className="w-6 h-6 mr-2" />
+            Back to Top
+          </Link>
         </div>
       </section>
 
