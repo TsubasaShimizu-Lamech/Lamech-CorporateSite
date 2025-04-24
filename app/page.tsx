@@ -41,7 +41,10 @@ export default function Home() {
   }
 
   // 環境に応じてベースパスを設定
-  const imagePath = (path: string) => path
+  const imagePath = (path: string) => {
+    const basePath = process.env.NODE_ENV === 'production' ? '/Lamech-CorporateSite' : ''
+    return `${basePath}${path}`
+  }
 
   return (
     <main className="min-h-screen bg-white">
