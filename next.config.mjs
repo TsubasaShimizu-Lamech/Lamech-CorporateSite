@@ -9,8 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/Lamech-CorporateSite' : '',
+  output: 'export'
 }
 
 export default nextConfig

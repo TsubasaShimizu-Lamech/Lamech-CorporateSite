@@ -41,15 +41,14 @@ export default function Home() {
   }
 
   // 環境に応じてベースパスを設定
-  const basePath = process.env.NODE_ENV === 'production' ? '/Lamech-CorporateSite' : ''
-  const imagePath = (path: string) => `${basePath}${path}`
+  const imagePath = (path: string) => path
 
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
       <header className="flex flex-col md:flex-row justify-between items-center px-4 md:px-12 py-4 md:py-8 bg-gray-200">
         <div className="flex items-center mb-4 md:mb-0">
-          <Link href={basePath || '/'} className="flex items-center gap-3 text-black">
+          <Link href="/" className="flex items-center gap-3 text-black">
             <Image
               src={imagePath('/images/lamech-logo.png')}
               alt="Lamech logo small"
@@ -63,13 +62,13 @@ export default function Home() {
         <nav>
           <ul className="flex gap-6 md:gap-12 text-base md:text-lg text-gray-600">
             <li>
-              <Link href={`${basePath}/#services`}>Services</Link>
+              <Link href="/#services">Services</Link>
             </li>
             <li>
-              <Link href={`${basePath}/#about`}>About</Link>
+              <Link href="/#about">About</Link>
             </li>
             <li>
-              <Link href={`${basePath}/#contact`}>Contact</Link>
+              <Link href="/#contact">Contact</Link>
             </li>
           </ul>
         </nav>
@@ -216,7 +215,7 @@ export default function Home() {
             <h3 className="mb-6 md:mb-8 font-normal text-3xl md:text-4xl">Contact</h3>
             <p className="text-lg md:text-xl mb-8 md:mb-16">こちらからお問い合わせください。</p>
             <div className="mt-auto pt-16 md:pt-32">
-              <Link href={`${basePath}/#`} className="inline-flex items-center text-lg md:text-xl">
+              <Link href="/#" className="inline-flex items-center text-lg md:text-xl">
                 <ArrowUp className="w-6 h-6 md:w-8 md:h-8 mr-2" />
                 Back to Top
               </Link>
